@@ -17,7 +17,14 @@ struct AddBookView: View {
     @State private var review = ""
     @State private var rating = 3
     
-    let genres = ["Fantasy", "Horror", "Kids", "Mystery", "Poetry", "Romance", "Thriller"]
+    let genres = ["Fantasy", "Biography", "Horror", "Kids", "Mystery", "Poetry", "Romance", "Thriller", "Business"]
+    
+    var disabled: Bool {
+        if title.isEmpty || title.hasPrefix(" ") || author.isEmpty || author.hasPrefix(" ") || review.isEmpty || review.hasPrefix(" ") {
+            return true
+        }
+        return false
+    }
     
     var body: some View {
         NavigationStack {
@@ -51,6 +58,7 @@ struct AddBookView: View {
                         dismiss()
                     }
                     .tint(.green)
+                    .disabled(disabled)
                 }
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
